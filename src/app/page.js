@@ -1,10 +1,15 @@
-import Image from 'next/image'
+import React from 'react'
+import Landing from './Components/Logs/Landing'
+import Login from './Components/Logs/Login'
 
-export default function Home() {
+
+const Page = () => {
   return (
-    <main className="flex min-h-screen flex-col items-center justify-between p-24">
-      <h1 className='text-3xl text-primary'>hello world</h1>
-      <h1 className='text-3xl text-secondry'>hello world</h1>
-    </main>
+    <div className='h-screen'>
+      {/* <Landing /> */}
+      <Login />
+    </div>
   )
 }
+
+export default Page
