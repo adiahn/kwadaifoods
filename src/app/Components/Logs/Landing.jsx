@@ -1,6 +1,6 @@
 import React from 'react';
-import Image from 'next/image';  // Import the Image component
-import Logo from '../../Images/Logo.png';  // Replace 'png' with the actual extension of your image
+import Image from 'next/image'; 
+import Logo from '../../Images/Logo.png'; 
 
 const Landing = () => {
   return (

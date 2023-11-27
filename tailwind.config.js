@@ -10,6 +10,7 @@ module.exports = {
    colors: {
         "primary": "white",
         "secondary": "#FE724C",
+        "back" : "#0000003B"
       },
     lineHeight: {
         'extra-loose': '10em',
