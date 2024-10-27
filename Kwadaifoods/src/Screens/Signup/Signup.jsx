@@ -1,12 +1,16 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { MdVisibility, MdVisibilityOff } from 'react-icons/md';
 import { FaFacebook } from 'react-icons/fa';
 import { FcGoogle } from 'react-icons/fc';
 import { BiUser } from 'react-icons/bi';
 import { HiOutlineMail } from 'react-icons/hi';
 import { RiLockPasswordLine } from 'react-icons/ri';
+import { IoChevronBack } from 'react-icons/io5';
+import { toast } from 'react-toastify';
 
 const SignUp = () => {
+  const navigate = useNavigate();
   const [showPassword, setShowPassword] = useState(false);
   const [formData, setFormData] = useState({
     fullName: '',
@@ -24,12 +28,24 @@ const SignUp = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Handle form submission here
+    // Add your signup logic here
     console.log(formData);
+    toast.success('Account created successfully!');
+    // Navigate to login page after successful signup
+    navigate('/login');
+  };
+
+  const handleSocialSignup = (provider) => {
+    console.log(`Signing up with ${provider}`);
+    // Implement social signup logic here
   };
 
   return (
     <div className="min-h-screen flex flex-col bg-white p-6">
+      <button onClick={() => navigate('/')} className="mb-8">
+        <IoChevronBack className="w-6 h-6 text-gray-800" />
+      </button>
+
       <div className="max-w-md w-full mx-auto space-y-8">
         <div className="space-y-6">
           <h1 className="text-2xl font-bold text-gray-900">Sign Up</h1>
@@ -115,9 +131,12 @@ const SignUp = () => {
           <div className="text-center">
             <p className="text-sm text-gray-600">
               Already have an account?{' '}
-              <a href="#" className="text-orange-500">
+              <button 
+                onClick={() => navigate('/login')}
+                className="text-orange-500"
+              >
                 Login
-              </a>
+              </button>
             </p>
           </div>
 
@@ -133,11 +152,17 @@ const SignUp = () => {
           </div>
 
           <div className="grid grid-cols-2 gap-4">
-            <button className="flex items-center justify-center px-4 py-2 border border-gray-300 rounded-lg hover:bg-gray-50">
+            <button 
+              onClick={() => handleSocialSignup('facebook')}
+              className="flex items-center justify-center px-4 py-2 border border-gray-300 rounded-lg hover:bg-gray-50"
+            >
               <FaFacebook className="w-6 h-6 text-blue-600" />
               <span className="ml-2">FACEBOOK</span>
             </button>
-            <button className="flex items-center justify-center px-4 py-2 border border-gray-300 rounded-lg hover:bg-gray-50">
+            <button 
+              onClick={() => handleSocialSignup('google')}
+              className="flex items-center justify-center px-4 py-2 border border-gray-300 rounded-lg hover:bg-gray-50"
+            >
               <FcGoogle className="w-6 h-6" />
               <span className="ml-2">GOOGLE</span>
             </button>
