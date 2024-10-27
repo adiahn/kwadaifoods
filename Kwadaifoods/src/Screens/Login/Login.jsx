@@ -8,7 +8,6 @@ const Login = () => {
       className="min-h-screen flex items-center justify-center bg-cover bg-center bg-no-repeat"
       style={{ backgroundImage: `url(${bgImage})` }}
     >
-      {/* Skip button */}
       <div className="absolute top-4 right-4">
         <button className="text-orange-500 font-medium">
           Skip
@@ -22,7 +21,7 @@ const Login = () => {
               Welcome to <span className="text-orange-500">KwadaiFoods</span>
             </h1>
             <p className="text-gray-700">
-              Your favorite foods delivered fast to your door.
+              Eat healthy, Stay healthy
             </p>
           </div>
 
