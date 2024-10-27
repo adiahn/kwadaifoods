@@ -1,16 +1,26 @@
+// Login.js
 import React from 'react';
-import { Facebook, Mail } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
+import { FaFacebook } from 'react-icons/fa';
+import { FcGoogle } from 'react-icons/fc';
+import { MdEmail, MdArrowForward } from 'react-icons/md';
 import bgImage from '../../Assets/Images/bg.jpg';
 
 const Login = () => {
+  const navigate = useNavigate();
+
+  const handleEmailSignUp = () => {
+    navigate('/signup');
+  };
+
   return (
     <div
       className="min-h-screen flex items-center justify-center bg-cover bg-center bg-no-repeat"
       style={{ backgroundImage: `url(${bgImage})` }}
     >
       <div className="absolute top-4 right-4">
-        <button className="text-orange-500 font-medium">
-          Skip
+        <button className="text-orange-500 font-medium flex items-center">
+          Skip <MdArrowForward className="ml-1 w-5 h-5" />
         </button>
       </div>
 
@@ -27,21 +37,20 @@ const Login = () => {
 
           <div className="space-y-4">
             <button className="w-full bg-blue-600 text-white py-3 px-4 rounded-lg flex items-center justify-center space-x-2 hover:bg-blue-700 transition-colors">
-              <Facebook className="w-5 h-5" />
+              <FaFacebook className="w-5 h-5" />
               <span>Sign in with Facebook</span>
             </button>
 
             <button className="w-full bg-white text-gray-700 py-3 px-4 rounded-lg flex items-center justify-center space-x-2 border border-gray-300 hover:bg-gray-50 transition-colors">
-              <img 
-                src="/api/placeholder/20/20" 
-                alt="Google logo" 
-                className="w-5 h-5"
-              />
+              <FcGoogle className="w-5 h-5" />
               <span>Sign in with Google</span>
             </button>
 
-            <button className="w-full bg-gray-100 text-gray-700 py-3 px-4 rounded-lg flex items-center justify-center space-x-2 hover:bg-gray-200 transition-colors">
-              <Mail className="w-5 h-5" />
+            <button 
+              onClick={handleEmailSignUp}
+              className="w-full bg-gray-100 text-gray-700 py-3 px-4 rounded-lg flex items-center justify-center space-x-2 hover:bg-gray-200 transition-colors"
+            >
+              <MdEmail className="w-5 h-5" />
               <span>Start with email or phone</span>
             </button>
           </div>
