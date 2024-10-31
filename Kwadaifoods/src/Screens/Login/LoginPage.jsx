@@ -24,10 +24,8 @@ const LoginPage = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Add your login logic here
     console.log(formData);
     toast.success('Login successful!');
-    // Navigate to dashboard or home page after successful login
   };
 
   const handleSocialLogin = (provider) => {
@@ -89,7 +87,7 @@ const LoginPage = () => {
           </div>
 
           <div className="text-right">
-            <button className="text-orange-500 text-sm">
+            <button className="text-orange-500 text-sm" onClick={() => navigate('/forgot-password')}>
               Forgot password?
             </button>
           </div>
@@ -97,6 +95,7 @@ const LoginPage = () => {
           <button
             type="submit"
             className="w-full bg-orange-500 text-white py-3 px-4 rounded-lg hover:bg-orange-600 transition-colors font-medium"
+            onClick={() => navigate('/app/dashboard')}
           >
             LOGIN
           </button>

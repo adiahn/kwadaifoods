@@ -123,6 +123,7 @@ const SignUp = () => {
             <button
               type="submit"
               className="w-full bg-orange-500 text-white py-3 px-4 rounded-lg hover:bg-orange-600 transition-colors"
+              onClick={() => navigate('/signup/verification')}
             >
               SIGN UP
             </button>

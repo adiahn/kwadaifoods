@@ -5,11 +5,16 @@ import 'react-toastify/dist/ReactToastify.css';
 import Welcome from './Screens/Login/Welcome';
 import LoginPage from './Screens/Login/LoginPage';
 import SignUp from './Screens/Signup/SignUp';
+import ForgotPasswordPage from './Screens/ForgotPassword/ForgotPassword';
+import VerificationPage from './Screens/Signup/VerificationPage';
+import OtpPage from './Screens/Signup/Otp';
+import Dashboard from './Screens/Dashboard/Dashboard';
+import Layout from './Components/layout/Layout';
 
 const router = createBrowserRouter([
   {
     path: '/',
-    element: <Welcome />,  // Changed to Welcome page as initial screen
+    element: <Welcome />,
   },
   {
     path: '/login',
@@ -19,6 +24,28 @@ const router = createBrowserRouter([
     path: '/signup',
     element: <SignUp />,
   },
+  {
+    path: '/signup/verification', 
+    element: <VerificationPage />,
+  },
+  {
+    path: '/signup/otp', 
+    element: <OtpPage />,
+  },
+  {
+    path: '/forgot-password',
+    element: <ForgotPasswordPage />,
+  },
+  {
+    path: '/app',
+    element: <Layout />,
+    children: [
+      {
+        path: "dashboard",
+        element: <Dashboard />
+      }
+    ]
+  }
 ]);
 
 function App() {
