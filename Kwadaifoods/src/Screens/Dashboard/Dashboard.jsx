@@ -1,9 +1,10 @@
 import React from 'react'
+import MySlider from '../../Components/Slider/MySlider'
 
 const Dashboard = () => {
   return (
-    <div>
-      Dashboard
+    <div className='container'>
+      <MySlider/>
     </div>
   )
 }

@@ -17,13 +17,12 @@ const Welcome = () => {
 
   const handleSocialLogin = (provider) => {
     console.log(`Logging in with ${provider}`);
-    // Implement social login logic here
   };
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-50">
       <div className="absolute top-4 right-4">
-        <button className="text-orange-500 font-medium flex items-center">
+        <button className="text-orange-500 font-medium flex items-center" onClick={handleSignIn}>
           Skip <MdArrowForward className="ml-1 w-5 h-5" />
         </button>
       </div>
