@@ -19,7 +19,6 @@ const SideBar = () => {
   const [isMobile, setIsMobile] = useState(false);
   const location = useLocation();
 
-  // Handle responsive behavior
   useEffect(() => {
     const handleResize = () => {
       if (window.innerWidth < 768) {
@@ -30,10 +29,19 @@ const SideBar = () => {
       }
     };
 
+    if (isExpanded) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = 'unset';
+    }
+
     handleResize();
     window.addEventListener('resize', handleResize);
-    return () => window.removeEventListener('resize', handleResize);
-  }, []);
+    return () => {
+      window.removeEventListener('resize', handleResize);
+      document.body.style.overflow = 'unset';
+    };
+  }, [isExpanded]);
 
   const menuItems = [
     { 
@@ -151,70 +159,86 @@ const SideBar = () => {
   );
 
   return (
-    <motion.aside
-      initial="collapsed"
-      animate={isExpanded ? "expanded" : "collapsed"}
-      variants={sidebarVariants}
-      className={`fixed top-0 left-0 h-full z-30 bg-white shadow-xl flex flex-col
-        ${isMobile ? 'translate-x-0' : ''}`}
-    >
-      {/* Toggle Button */}
-      <div className="h-16 px-4 flex items-center justify-end border-b border-gray-100">
-        <motion.button
-          whileHover={{ scale: 1.1 }}
-          whileTap={{ scale: 0.9 }}
-          onClick={() => setIsExpanded(!isExpanded)}
-          className="p-1.5 rounded-lg hover:bg-orange-50 text-orange-500"
-        >
-          {isExpanded ? <ChevronLeft /> : <ChevronRight />}
-        </motion.button>
-      </div>
+    <>
+      {/* Blur Overlay */}
+      <AnimatePresence>
+        {isExpanded && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.2 }}
+            onClick={() => setIsExpanded(false)}
+            className="fixed inset-0 bg-black/20 backdrop-blur-sm z-20"
+          />
+        )}
+      </AnimatePresence>
 
-      {/* Main Navigation */}
-      <div className="flex-1 overflow-y-auto pt-4 pb-6 scrollbar-thin scrollbar-thumb-gray-200 scrollbar-track-transparent">
-        <MenuSection 
-          title="Main Menu" 
-          items={menuItems.filter(item => item.section === 'main')} 
-        />
-        
-        <div className="mx-4 my-4 border-t border-gray-100" />
-        
-        <MenuSection 
-          title="Support" 
-          items={menuItems.filter(item => item.section === 'support')} 
-        />
-      </div>
-
-      {/* Logout Button */}
-      <motion.div 
-        className="mt-auto px-2 pb-4 pt-2 border-t border-gray-100"
-        whileHover={{ scale: 1.02 }}
-        whileTap={{ scale: 0.98 }}
+      <motion.aside
+        initial="collapsed"
+        animate={isExpanded ? "expanded" : "collapsed"}
+        variants={sidebarVariants}
+        className={`fixed top-0 left-0 h-full z-30 bg-white shadow-xl flex flex-col
+          ${isMobile ? 'translate-x-0' : ''}`}
       >
-        <Link
-          to="/login"
-          className="flex items-center gap-3 px-3 py-2.5 rounded-lg transition-all duration-200 
-            bg-red-50 text-red-600 hover:bg-red-100"
+        {/* Toggle Button */}
+        <div className="h-16 px-4 flex items-center justify-end border-b border-gray-100">
+          <motion.button
+            whileHover={{ scale: 1.1 }}
+            whileTap={{ scale: 0.9 }}
+            onClick={() => setIsExpanded(!isExpanded)}
+            className="p-1.5 rounded-lg hover:bg-orange-50 text-orange-500"
+          >
+            {isExpanded ? <ChevronLeft /> : <ChevronRight />}
+          </motion.button>
+        </div>
+
+        {/* Main Navigation */}
+        <div className="flex-1 overflow-y-auto pt-4 pb-6 scrollbar-thin scrollbar-thumb-gray-200 scrollbar-track-transparent">
+          <MenuSection 
+            title="Main Menu" 
+            items={menuItems.filter(item => item.section === 'main')} 
+          />
+          
+          <div className="mx-4 my-4 border-t border-gray-100" />
+          
+          <MenuSection 
+            title="Support" 
+            items={menuItems.filter(item => item.section === 'support')} 
+          />
+        </div>
+
+        {/* Logout Button */}
+        <motion.div 
+          className="mt-auto px-2 pb-4 pt-2 border-t border-gray-100"
+          whileHover={{ scale: 1.02 }}
+          whileTap={{ scale: 0.98 }}
         >
-          <div className="min-w-[24px] flex items-center justify-center">
-            <ExitToApp />
-          </div>
-          <AnimatePresence>
-            {isExpanded && (
-              <motion.span
-                initial={{ opacity: 0, x: -10 }}
-                animate={{ opacity: 1, x: 0 }}
-                exit={{ opacity: 0, x: -10 }}
-                transition={{ duration: 0.2 }}
-                className="whitespace-nowrap text-sm font-medium"
-              >
-                Log Out
-              </motion.span>
-            )}
-          </AnimatePresence>
-        </Link>
-      </motion.div>
-    </motion.aside>
+          <Link
+            to="/login"
+            className="flex items-center gap-3 px-3 py-2.5 rounded-lg transition-all duration-200 
+              bg-red-50 text-red-600 hover:bg-red-100"
+          >
+            <div className="min-w-[24px] flex items-center justify-center">
+              <ExitToApp />
+            </div>
+            <AnimatePresence>
+              {isExpanded && (
+                <motion.span
+                  initial={{ opacity: 0, x: -10 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  exit={{ opacity: 0, x: -10 }}
+                  transition={{ duration: 0.2 }}
+                  className="whitespace-nowrap text-sm font-medium"
+                >
+                  Log Out
+                </motion.span>
+              )}
+            </AnimatePresence>
+          </Link>
+        </motion.div>
+      </motion.aside>
+    </>
   );
 };
 

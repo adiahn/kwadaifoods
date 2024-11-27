@@ -34,7 +34,6 @@ const MySlider = () => {
           display: 'flex',
           justifyContent: 'center',
           width: '100%',
-        
         }}
       >
         <ul style={{ margin: '0px' }}> {dots} </ul>
@@ -54,15 +53,17 @@ const MySlider = () => {
   };
 
   return (
-    <div className="relative w-full lg:w-4/4 xl:w-2/2 mx-auto py-2 h-3">
-      <Slider {...settings} className="rounded-lg h-36 shadow-lg overflow-hidden">
-        <div>
-          <img src={slide1} alt="Slide 1" className="w-full h-36 object-cover bg-center" />
-        </div>  
-        <div>
-          <img src={slide2} alt="Slide 2" className="w-full h-auto object-cover" />
-        </div>
-      </Slider>
+    <div className="w-full mx-auto">
+      <div className="relative h-[200px]">
+        <Slider {...settings} className="rounded-lg shadow-lg overflow-hidden h-full">
+          <div className="h-full">
+            <img src={slide1} alt="Slide 1" className="w-full h-full object-cover" />
+          </div>  
+          <div className="h-full">
+            <img src={slide2} alt="Slide 2" className="w-full h-full object-cover" />
+          </div>
+        </Slider>
+      </div>
     </div>
   );
 };

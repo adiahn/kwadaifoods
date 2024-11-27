@@ -22,7 +22,6 @@ const NavBar = () => {
 
   const handleSearch = (e) => {
     e.preventDefault();
-    // Handle search logic here
     console.log('Searching for:', searchQuery);
   };
 
@@ -35,7 +34,7 @@ const NavBar = () => {
     >
       <div className="container mx-auto px-4 py-3">
         {/* Main Navigation Bar */}
-        <div className="flex justify-between items-center">
+        <div className="flex justify-between items-center px-16">
           {/* Logo and Menu Button Container */}
           <div className="flex items-center space-x-4">
             <motion.button
